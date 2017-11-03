@@ -20,17 +20,22 @@ export class AppComponent implements OnInit, OnDestroy {
     }
 
     start() {
-        this.subscription = Observable.interval(1000).subscribe(res => {
-            this.tiks++;
-        });
+        console.log(this.subscription);
+        if (!this.subscription) {
+            this.subscription = Observable.interval(1000).subscribe(res => {
+                this.tiks++;
+            });
+        }
     }
 
     wait() {
         this.subscription.unsubscribe();
+        delete this.subscription;
     }
 
     reset() {
         this.subscription.unsubscribe();
+        delete this.subscription;
         this.tiks = 0;
     }
 }
