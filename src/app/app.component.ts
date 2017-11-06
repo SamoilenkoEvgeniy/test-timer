@@ -20,9 +20,8 @@ export class AppComponent implements OnInit, OnDestroy {
     }
 
     start() {
-        console.log(this.subscription);
-        if (!this.subscription) {
-            this.subscription = Observable.interval(1000).subscribe(res => {
+        if (!this.subscription || this.subscription.closed) {
+            this.subscription = Observable.interval(1000).subscribe(() => {
                 this.tiks++;
             });
         }
@@ -30,12 +29,10 @@ export class AppComponent implements OnInit, OnDestroy {
 
     wait() {
         this.subscription.unsubscribe();
-        delete this.subscription;
     }
 
     reset() {
         this.subscription.unsubscribe();
-        delete this.subscription;
         this.tiks = 0;
     }
 }

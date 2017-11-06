@@ -2,15 +2,15 @@
     <div class="row">
         <div class="col-12" style="text-align: center;">
             <h3>
-                Test task Evgeniy Samoylenko
+                Test task by Evgeniy Samoylenko
             </h3>
         </div>
         <div class="col-12" style="text-align: center; margin-top: 24px;">
             {{ tiks | timePipe }}
         </div>
         <div class="col-12" style="text-align: center; margin-top: 24px;">
-            <button (click)="start()">start</button>
-            <button (click)="wait()">wait</button>
+            <button [disabled]="subscription && !subscription.closed" (click)="start()">start</button>
+            <button [disabled]="subscription?.closed && tiks > 0" (click)="wait()">wait</button>
             <button (click)="reset()">reset</button>
         </div>
     </div>
